@@ -79,7 +79,8 @@ public class Example {
     // Configure Infinispan to use default transport and the default Kubernetes
     // JGroups configuration.
     GlobalConfiguration globalConfig = new GlobalConfigurationBuilder().transport().defaultTransport()
-        .addProperty("configurationFile", "default-configs/default-jgroups-kubernetes.xml").build();
+//        .addProperty("configurationFile", "default-configs/default-jgroups-kubernetes.xml").build();
+        .addProperty("configurationFile", "myconfiguration.xml").build();
 
     // Use a distributed cache for the quickstart application.
     Configuration cacheConfiguration = new ConfigurationBuilder().clustering().cacheMode(CacheMode.REPL_SYNC).build();
