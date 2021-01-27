@@ -7,7 +7,7 @@
         xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/jgroups-4.2.xsd">
 
    <!-- jgroups.tcp.address is deprecated and will be removed, see ISPN-11867 -->
-   <TCP bind_addr="${jgroups.bind.address,jgroups.tcp.address:SITE_LOCAL}"
+   <TCP bind_addr="${jgroups.bind.address,jgroups.tcp.address:match-interface:eth.*}"
         bind_port="${jgroups.bind.port,jgroups.tcp.port:7800}"
         enable_diagnostics="false"
         thread_naming_pattern="pl"
@@ -52,9 +52,6 @@
    />
    <pbcast.GMS print_local_addr="false"
                join_timeout="${jgroups.join_timeout:2000}"
-   />
-   <UFC max_credits="4m"
-        min_threshold="0.40"
    />
    <MFC max_credits="4m"
         min_threshold="0.40"
