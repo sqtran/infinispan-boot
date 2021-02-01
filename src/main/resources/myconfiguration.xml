@@ -7,7 +7,7 @@
         xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/jgroups-4.2.xsd">
 
    <!-- jgroups.tcp.address is deprecated and will be removed, see ISPN-11867 -->
-   <TCP bind_addr="${jgroups.bind.address,jgroups.tcp.address:eth.*}"
+   <TCP bind_addr="${jgroups.bind.address,jgroups.tcp.address:GLOBAL}"
         bind_port="${jgroups.bind.port,jgroups.tcp.port:7800}"
         enable_diagnostics="false"
         thread_naming_pattern="pl"
