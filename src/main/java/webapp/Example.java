@@ -1,5 +1,8 @@
 package webapp;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.infinispan.Cache;
@@ -39,6 +42,14 @@ public class Example {
   @RequestMapping(value = "/all", method = RequestMethod.GET)
   public ResponseEntity<String> getAll() {
     StringBuilder builder = new StringBuilder();
+
+    builder.append("Host: ");
+    try {
+      builder.append(InetAddress.getLocalHost().getHostName());
+    } catch (UnknownHostException e) {
+      builder.append("Unable to determine host\n");
+    }
+
     for(String s : cache.keySet()) {
       String output = String.format("[%s] = %s\n", s, cache.get(s).toString());
       System.out.print(output);
