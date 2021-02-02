@@ -1,17 +1,5 @@
 package webapp;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.infinispan.Cache;
@@ -25,10 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,8 +64,9 @@ public class Example {
     // Configure Infinispan to use default transport and the default Kubernetes
     // JGroups configuration.
     GlobalConfiguration globalConfig = new GlobalConfigurationBuilder().transport().defaultTransport()
-        .addProperty("configurationFile", "default-configs/default-jgroups-kubernetes.xml").build();
-//        .addProperty("configurationFile", "myconfiguration.xml").build();
+      // newer Infinispan versions come with a default jgroups for kubernetes
+      //.addProperty("configurationFile", "default-configs/default-jgroups-kubernetes.xml").build();
+      .addProperty("configurationFile", "myconfiguration.xml").build();
 
     // Use a distributed cache for the quickstart application.
     Configuration cacheConfiguration = new ConfigurationBuilder().clustering().cacheMode(CacheMode.REPL_SYNC).build();
