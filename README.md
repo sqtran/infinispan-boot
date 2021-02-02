@@ -28,3 +28,5 @@ spec:
 status:
   loadBalancer: {}
 ```
+
+Update your `JAVA_OPTS` again with another system property for `-Djgroups.dns.query` that's set for your service local address, i.e. `headless-cache.<namespace>.svc.cluster.local`
