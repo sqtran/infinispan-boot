@@ -8,7 +8,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.org.infinispan>12.0.0.Final</version.org.infinispan>
+		<version.org.infinispan>11.0.3.Final-redhat-00001</version.org.infinispan>
 	</properties>
 
 	<parent>
@@ -53,7 +53,7 @@
 		</dependency>
 		<dependency>
             <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-cloud</artifactId>
+            <artifactId>infinispan-embedded</artifactId>
         </dependency> 
 	</dependencies>
 
