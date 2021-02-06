@@ -7,10 +7,11 @@ This is a `spring-boot` demo of how to set up an embedded Infinispan cache that 
 This is a `spring-boot` application, so just run it with the following.
 
 ```bash
-mvn spring-boot:run -Djgroups.dns.query=localhost
+mvn spring-boot:run -Djgroups.dns.query=localhost -Dspring-boot.run.profiles=local
 ```
 
-The `-Djgroups.dns.query=localhost` is required for the Infinispan clustering, which when working locally, won't ever connect to a cluster.
+- `-Djgroups.dns.query=localhost` is needed for the Infinispan clustering configurations.  When working locally, this won't ever connect to a form cluster.
+- `-Dspring-boot.run.profiles=local` will set up logback to use the non-folding log formats, which is easier to read when testing locally.
 
 
 ## Deploying to Kubernetes
