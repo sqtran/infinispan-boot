@@ -17,7 +17,7 @@ mvn spring-boot:run -Djgroups.dns.query=localhost -Dspring-boot.run.profiles=loc
 ## Deploying to Kubernetes
 When deploying this on OpenShift, the one gotcha is the default network stack is IPv6.  Even though the documentation says that IPv6 is allowed, pods were unable to find each other and form a cluster.
 
-To resolve that issue, override the Java Options with the `JAVA_OPTS` environment variable, and add `-Djava.net.preferIPv4Stack=true` to it.
+To resolve that issue, override the Java Options with the `JAVA_OPTS_APPEND` environment variable, and add `-Djava.net.preferIPv4Stack=true` to it.
 
 `DNS_PING` also requires that you have a DNS service that can return all the IPs for a given DNS Query.  Even though this is built with OpenShift in mind, in theory you could use any DNS service.
 
@@ -43,4 +43,4 @@ status:
   loadBalancer: {}
 ```
 
-Update your `JAVA_OPTS` again with another system property for `-Djgroups.dns.query` that's set for your service local address, i.e. `headless-cache.<namespace>.svc.cluster.local`
+Update your `JAVA_OPTS_APPEND` again with another system property for `-Djgroups.dns.query` that's set for your service local address, i.e. `headless-cache.<namespace>.svc.cluster.local`
