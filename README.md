@@ -14,6 +14,21 @@ mvn spring-boot:run -Djgroups.dns.query=localhost -Dspring-boot.run.profiles=loc
 - `-Dspring-boot.run.profiles=local` will set up logback to use the non-folding log formats, which is easier to read when testing locally.
 
 
+## Testing
+
+There are a few endpoints that you can use to verify that the cache is working. 
+
+```bash
+# PUT something into the cache
+curl -X PUT localhost:8080/cache/<key>/<value>
+
+# GET everything in the cache
+curl localhost:8080/all
+
+# GET an individual entry
+curl localhost:8080/cache/<key>
+```
+
 ## Deploying to Kubernetes
 When deploying this on OpenShift, the one gotcha is the default network stack is IPv6.  Even though the documentation says that IPv6 is allowed, pods were unable to find each other and form a cluster.
 
