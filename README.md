@@ -21,7 +21,7 @@ To resolve that issue, override the Java Options with the `JAVA_OPTS_APPEND` env
 
 `DNS_PING` also requires that you have a DNS service that can return all the IPs for a given DNS Query.  Even though this is built with OpenShift in mind, in theory you could use any DNS service.
 
-Create a `headless Service` that selects your application pods.
+Create a `headless service` that selects your application pods.
 
 ```yaml
 kind: Service
@@ -29,11 +29,6 @@ apiVersion: v1
 metadata:
   name: headless-cache
 spec:
-  ports:
-    - name: dnsping
-      protocol: TCP
-      port: 7800
-      targetPort: 7800
   selector:
     app: infinispan-boot-git
   clusterIP: None
@@ -43,4 +38,9 @@ status:
   loadBalancer: {}
 ```
 
-Update your `JAVA_OPTS_APPEND` again with another system property for `-Djgroups.dns.query` that's set for your service local address, i.e. `headless-cache.<namespace>.svc.cluster.local`
+⚠️ The `headless service` above intentionally exludes a port configuration. ⚠️
+
+If this application is deployed in an Istio Service Mesh, `Pilot` will warn about conflicting ports and clustering will not work.  The configuration above works with and without Istio.
+
+
+Lastly, update your `JAVA_OPTS_APPEND` again so it includes the `Djgroups.dns.query` parameter, like the following: `-Djgroups.dns.query=headless-cache.<namespace>.svc.cluster.local -Djava.net.preferIPv4Stack=true`
